@@ -143,6 +143,25 @@ nets = dict(
         VERSION_CHECK=lambda v: True,
         VERSION_WARNING=lambda v: 'Upgrade Fastcoin to >= 0.8.5.1!' if v < 70002 else None,
     ),
+    defcoin=math.Object(
+        PARENT=networks.nets['defcoin'],
+        SHARE_PERIOD=15, # seconds
+        CHAIN_LENGTH=24*60*60//10, # shares
+        REAL_CHAIN_LENGTH=24*60*60//10, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=3, # blocks
+        IDENTIFIER='313370dead0babe0'.decode('hex'),
+        PREFIX='bad0beef0313370f'.decode('hex'),
+        P2P_PORT=13371,
+        MIN_TARGET=0,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=True,
+        WORKER_PORT=13370,
+        BOOTSTRAP_ADDRS='coin.iptron.net'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-dfc',
+        VERSION_CHECK=lambda v: True,
+        VERSION_WARNING=lambda v: 'Upgrade defcoind to >=0.8.6.2!' if v < 80602 else None,
+    ),
 
 )
 for net_name, net in nets.iteritems():
